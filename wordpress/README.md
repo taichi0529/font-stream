@@ -1,5 +1,5 @@
 # kusanagi on dockerの設定方法
-ritorengo用に最適化してありますが、他でもそんなに手をかけずに使えるようにしてあります。
+xxxxxxxx用に最適化してありますが、他でもそんなに手をかけずに使えるようにしてあります。
 ## デフォルトからの変更内容
 
 * kusanagi-php7
@@ -46,16 +46,17 @@ docker-compose up -d
 
 リトレンゴ用の設定はしてあるけれどもその他はhaproxy.cfgをみて設定して下さい。そんなに難しくはないはず。
 
-### kusanagi版ritorengo
+### kusanagi版xxxxxxxx
 
-git clone pm1932@pm1932.git.backlog.jp:/RITORENGO/ritorengo.git
-mv ritorengo ritorengo_dev
-cd ritorengo_dev
+git clone pm1932@pm1932.git.backlog.jp:/xxxxxxxx/xxxxxxxx.git
+mv xxxxxxxx xxxxxxxx_dev
+cd xxxxxxxx_dev
 ./compose.sh dev start
 
 
 
 ## ステージング環境(test)
+amazon linuxで動作確認しています。
 amazon linuxで動作確認しています。
 
 
@@ -70,14 +71,14 @@ useradd -u 1001 www-data
 groupadd -g 1001 www-data
 usermod -a -G docker www-data
 
-sudo su - ritorengo
+sudo su - xxxxxxxx
 
 ssh-keygen -t rsa -b 4096
-#公開鍵をbacklogのritorengo@gitユーザーに登録
+#公開鍵をbacklogのxxxxxxxx@gitユーザーに登録
 
-git clone pm1932@pm1932.git.backlog.jp:/RITORENGO/ritorengo.git
-mv ritorengo ritorengo_test
-cd ritorengo_test
+git clone pm1932@pm1932.git.backlog.jp:/xxxxxxxx/xxxxxxxx.git
+mv xxxxxxxx xxxxxxxx_test
+cd xxxxxxxx_test
 ./compose.sh test start
 
 ```
@@ -89,7 +90,7 @@ cd ritorengo_test
 
 http://qiita.com/ne_ko_ka/items/b4514402df65b6b1a7ff
 
-ACMでSSL証明書をつけてtest.ritorengo.comのゾーン情報をcloudfrontのアドレスにすればみられるはず。
+ACMでSSL証明書をつけてtest.xxxxxxxx.comのゾーン情報をcloudfrontのアドレスにすればみられるはず。
 
 ### 備考
 
