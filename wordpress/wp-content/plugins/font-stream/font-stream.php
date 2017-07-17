@@ -71,7 +71,9 @@ class Font_Stream
 			</div>
 			
 			<h4>Font</h4>
-			<ul class="fontList"></ul>
+			<ul class="fontList">
+				<li>アニト L 等幅 <a href="#">削除</a></li>
+			</ul>
 			<button name="submit" class="add button button-primary">＋フォントを追加</button>
 			<input type="submit" name="submit" class="submit button button-primary" value="変更を保存">
 		</form>';

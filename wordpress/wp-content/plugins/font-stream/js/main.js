@@ -25,7 +25,20 @@
                 $select.append($option);
             }
             var $li = $("<li />");
+            var $del = $('<a href="#">削除</a>');
+
+            var $weight = $('<select><option>L</option><option>M</option></select>');
+            var $mp = $('<select><option>等幅</option><option>プロポーショナル</option></select>');
+
+            $del.on('click',function(e){
+                e.preventDefault();
+                $li.remove();
+            });
             $li.append($select);
+            $li.append($weight);
+            $li.append($mp);
+            $li.append($del);
+
             $fontList.append($li);
             onFetch = false;
         };

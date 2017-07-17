@@ -15,3 +15,7 @@ form.font-stream{
 .font-stream input[type="text"]{
     width: 100%;
 }
+
+.font-stream .fontList li{
+    width:100%;
+}
