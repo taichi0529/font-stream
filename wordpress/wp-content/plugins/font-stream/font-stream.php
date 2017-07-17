@@ -17,10 +17,22 @@ class Font_Stream
 {
 
 	public function __construct() {
+
+		add_action( 'admin_enqueue_scripts', function($hook) {
+			global $pagenow;
+			if ( $pagenow == "options-general.php" && isset($_GET['page']) && $_GET['page'] == "font_stream" )
+			{
+				wp_enqueue_script( "font-stream-js", plugins_url('font-stream/js/main.js'), ['jquery'] );
+				wp_enqueue_style( "font-stream-css", plugins_url('font-stream/css/main.css'));
+			}
+		} );
+
 		// メニューを追加します。
 		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'fontstream_edit_plugin_list_links' ));
 
-		add_action('admin_menu', array($this, 'add_options_page'));
+		add_action('admin_menu', function(){
+			add_options_page('fontstream', 'Font Stream', 'manage_options', 'font_stream', array($this, 'show_option'));
+		});
 
 //		$this->set_option();
 	}
@@ -40,12 +52,6 @@ class Font_Stream
 		], $links );
 	}
 
-	/**
-	 * サイドメニューに追加
-	 */
-	public function add_options_page() {
-		add_options_page('fontstream', 'Font Stream', 'manage_options', 'font_stream', array($this, 'show_option'));
-	}
 
 	public function show_option() {
 //		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -58,35 +64,16 @@ class Font_Stream
 		$master_on_checked = $this->font_stream_master_on === '1' ? 'checked' : '';
 
 		echo "<h2>Font Stream</h2>";
-		echo '<form action="'.admin_url( 'options-general.php?page=font_stream' ).'" method="post" accept-charset="utf-8">
+		echo '<form action="'.admin_url( 'options-general.php?page=font_stream' ).'" method="post" accept-charset="utf-8" class="font-stream">
 			<h4>Token</h4>
+			<div>
+				<input type="text" name="font_stream_directory" value="'.$this->font_stream_directory.'">
+			</div>
 			
-			<table class="form-ddddtable">
-				<tbody>
-					<tr>
-						<th scope="row">使用機能</th>
-						<td>
-							<input type="checkbox" id="check_font_stream_pull" name="font_stream_pull" value="1" '.$pull_checked.'>&nbsp;<label for="check_font_stream_pull">git pull</label><br>
-							<input type="checkbox" id="check_font_stream_fetch" name="font_stream_fetch" value="1" '.$fetch_checked.'>&nbsp;<label for="check_font_stream_fetch">git fetch</label><br>
-							<input type="checkbox" id="check_font_stream_checkout" name="font_stream_checkout" value="1" '.$checkout_checked.'>&nbsp;<label for="check_font_stream_checkout">git checkout</label><br>
-							<input type="checkbox" id="check_font_stream_checkout" name="font_stream_master_on" value="1" '.$master_on_checked.'>&nbsp;<label for="check_font_stream_checkout">git enable checkout master</label>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">REMOTE</th>
-						<td>
-							<input type="text" name="font_stream_remote" value="'.$this->font_stream_remote.'"><br>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">directory</th>
-						<td>
-							<input type="text" name="font_stream_directory" value="'.$this->font_stream_directory.'"><br>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<input type="submit" name="submit" id="submit" class="button button-primary" value="変更を保存">
+			<h4>Font</h4>
+			<ul class="fontList"></ul>
+			<button name="submit" class="add button button-primary">＋フォントを追加</button>
+			<input type="submit" name="submit" class="submit button button-primary" value="変更を保存">
 		</form>';
 	}
 }

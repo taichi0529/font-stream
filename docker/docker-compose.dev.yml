@@ -30,7 +30,7 @@ services:
       PROFILE: kusanagi
       FQDN: dev.${PROJECT}.com
       WPLANG: ja
-      BCACHE: "on"
+      BCACHE: "off"
       FCACHE: "off"
     volumes_from:
       - kusanagi-data

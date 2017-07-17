@@ -1,0 +1,17 @@
+form.font-stream{
+    width: 50%;
+}
+
+.font-stream h4 {
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+    background: #004d40;
+    font-weight: 300;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.font-stream input[type="text"]{
+    width: 100%;
+}

@@ -1,7 +1,7 @@
 [
   {
-    "font-family": "AnzuMoji",
-    "font-name": "あんずもじ",
+    "fontFamily": "AnzuMoji",
+    "fontName": "あんずもじ",
     "src": [
       {
         "url": "https://www.font-stream.com/fontdata/AnzuMoji-none.eot",
@@ -18,8 +18,8 @@
     ]
   },
   {
-    "font-family": "OLEriji",
-    "font-name": "OLえり字",
+    "fontFamily": "OLEriji",
+    "fontName": "OLえり字",
     "src": [
       {
         "url": "https://www.font-stream.com/fontdata/OLEriji-none.eot",
