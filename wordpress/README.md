@@ -44,7 +44,6 @@ dockerは17.06以上で。
 docker-compose up -d
 ```
 
-リトレンゴ用の設定はしてあるけれどもその他はhaproxy.cfgをみて設定して下さい。そんなに難しくはないはず。
 
 ### kusanagi版xxxxxxxx
 
@@ -94,7 +93,6 @@ ACMでSSL証明書をつけてtest.xxxxxxxx.comのゾーン情報をcloudfront�
 
 ### 備考
 
-画像は旧サーバーとrsyncするようにしてある。
 DBはmysql5.7にしてある。
 
 ## 商用環境(prod)
