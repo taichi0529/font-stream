@@ -1,0 +1,56 @@
+version: '2'
+
+services:
+  kusanagi-data:
+    container_name: ritorengo-${MODE}-data
+    image: busybox
+    restart: always
+    stdin_open: true
+    tty: true
+    volumes:
+      - /etc/nginx/conf.d
+      - /etc/httpd/conf.d
+      - /etc/kusanagi.d
+      - /home/kusanagi
+      - ${WP_DIR}/wp-content:/home/kusanagi/kusanagi/DocumentRoot/wp-content
+      - ${WP_DIR}/wp-config.prod.php:/home/kusanagi/kusanagi/DocumentRoot/wp-config.php
+      - ${WP_DIR}/images:/home/kusanagi/kusanagi/DocumentRoot/images
+      - ${SCRIPT_DIR}/htpasswd:/home/kusanagi/.htpasswd
+    command: /bin/sh
+
+  kusanagi-nginx:
+    container_name: ritorengo-${MODE}-nginx
+    #image: primestrategy/kusanagi-nginx
+    build:
+      context: ./
+      dockerfile: Dockerfile-nginx
+      #args:
+      #  buildno: 2
+    environment:
+      PROFILE: kusanagi
+      FQDN: www.ritorengo.com
+      WPLANG: ja
+      BCACHE: "on"
+      FCACHE: "off"
+    volumes_from:
+      - kusanagi-data
+    links:
+      - kusanagi-php7:php
+    ports:
+      - "8890:80"
+
+  kusanagi-php7:
+    container_name: ritorengo-${MODE}-php7
+    #image: primestrategy/kusanagi-php7
+    build:
+      context: ./
+      dockerfile: Dockerfile-php7
+      #args:
+      #  buildno: 3
+    volumes_from:
+      - kusanagi-data
+    volumes:
+      - ${SCRIPT_DIR}/my_php.ini:/usr/local/etc/php/conf.d/my_php.ini:ro
+      - ${SCRIPT_DIR}/..:/home/kusanagi/git
+      - /home/www-data/.ssh:/home/www-data/.ssh
+

@@ -1,0 +1,4 @@
+FROM primestrategy/kusanagi-nginx
+RUN  sed -i -e 's/\(mv \.\/wordpress\/\* \/home\/kusanagi\/\$PROFILE\/DocumentRoot\)/\1\n\tmv \.\/wordpress\/wp-content\/languages \/home\/kusanagi\/\$PROFILE\/DocumentRoot\/wp-content\//' /usr/lib/kusanagi/lib/virt.sh \
+&& echo "source /after_virt.sh" >> /usr/lib/kusanagi/lib/virt.sh
+COPY ./after_virt.sh /

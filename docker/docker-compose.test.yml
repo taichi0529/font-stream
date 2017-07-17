@@ -1,0 +1,73 @@
+version: '2'
+
+services:
+  kusanagi-data:
+    container_name: ${PROJECT}-${MODE}-data
+    image: busybox
+    restart: always
+    stdin_open: true
+    tty: true
+    volumes:
+      - /var/lib/mysql
+      - /etc/nginx/conf.d
+      - /etc/httpd/conf.d
+      - /etc/kusanagi.d
+      - /home/kusanagi
+      - ${WP_DIR}/wp-content:/home/kusanagi/kusanagi/DocumentRoot/wp-content
+      - ${WP_DIR}/wp-config.test.php:/home/kusanagi/kusanagi/DocumentRoot/wp-config.php
+      - ${WP_DIR}/images:/home/kusanagi/kusanagi/DocumentRoot/images
+      - ${SCRIPT_DIR}/htpasswd:/home/kusanagi/.htpasswd
+    command: /bin/sh
+
+  kusanagi-nginx:
+    container_name: ${PROJECT}-${MODE}-nginx
+    #image: primestrategy/kusanagi-nginx
+    build:
+      context: ./
+      dockerfile: Dockerfile-nginx
+      #args:
+      #  buildno: 2 
+    environment:
+      PROFILE: kusanagi
+      FQDN: test.${PROJECT}.com
+      WPLANG: ja
+      BCACHE: "on"
+      FCACHE: "off"
+    volumes_from:
+      - kusanagi-data
+    links:
+      - kusanagi-php7:php
+      - kusanagi-db:mysql
+    ports:
+      - "8891:80"
+
+  kusanagi-db:
+    container_name: ${PROJECT}-${MODE}-db
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_USER:     user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: wordpress
+    volumes_from:
+      - kusanagi-data
+    ports:
+      - "3307:3306"
+
+  kusanagi-php7:
+    container_name: ${PROJECT}-${MODE}-php7
+    #image: primestrategy/kusanagi-php7
+    build:
+      context: ./
+      dockerfile: Dockerfile-php7
+      #args:
+      #  buildno: 3
+    links:
+      - kusanagi-db:mysql
+    volumes_from:
+      - kusanagi-data
+    volumes:
+      - ${SCRIPT_DIR}/my_php.ini:/usr/local/etc/php/conf.d/my_php.ini:ro
+      - ${SCRIPT_DIR}/..:/home/kusanagi/git
+      - /home/www-data/.ssh:/home/www-data/.ssh
+
