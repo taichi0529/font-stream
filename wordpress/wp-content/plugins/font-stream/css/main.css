@@ -1,4 +1,4 @@
-form.font-stream{
+form.font-stream {
     width: 50%;
 }
 
@@ -12,10 +12,35 @@ form.font-stream{
     color: #fff;
 }
 
-.font-stream input[type="text"]{
+.font-stream input[type="text"] {
     width: 100%;
 }
 
-.font-stream .fontList li{
-    width:100%;
+.font-stream .fontList li {
+    width: 100%;
+}
+
+.font-stream table.fontList {
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.font-stream .fontList td, .font-stream .fontList th {
+    border: 1px solid #888;
+}
+
+.font-stream th.font {
+    width: 200px;
+}
+
+.font-stream th.weight {
+    width: 80px;
+}
+
+.font-stream th.type {
+    width: 160px;
+}
+
+.font-stream th.delete {
+    width: 50px;
 }

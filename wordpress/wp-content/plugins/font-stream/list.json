@@ -1,38 +1,23 @@
-[
-  {
+{
+  "あんずもじ": {
     "fontFamily": "AnzuMoji",
-    "fontName": "あんずもじ",
-    "src": [
-      {
-        "url": "https://www.font-stream.com/fontdata/AnzuMoji-none.eot",
-        "format": "embedded-opentype"
-      },
-      {
-        "url": "https://www.font-stream.com/fontdata/AnzuMoji-none.woff",
-        "format": "woff"
-      },
-      {
-        "url": "https://www.font-stream.com/fontdata/AnzuMoji-none.ttf",
-        "format": "truetype"
-      }
-    ]
+    "weight": [],
+    "type": ["pro", "mono"],
+    "format": ["embedded-opentype", "woff", "truetype"],
+    "path": "https://www.font-stream.com/fontdata/"
   },
-  {
-    "fontFamily": "OLEriji",
-    "fontName": "OLえり字",
-    "src": [
-      {
-        "url": "https://www.font-stream.com/fontdata/OLEriji-none.eot",
-        "format": "embedded-opentype"
-      },
-      {
-        "url": "https://www.font-stream.com/fontdata/OLEriji-none.woff",
-        "format": "woff"
-      },
-      {
-        "url": "https://www.font-stream.com/fontdata/OLEriji-none.otf",
-        "format": "opentype"
-      }
-    ]
+  "アニト": {
+    "fontFamily": "Anito",
+    "weight": ["L","M"],
+    "type": ["pro", "mono"],
+    "format": ["embedded-opentype", "woff", "opentype"],
+    "path": "https://www.font-stream.com/fontdata/"
+  },
+  "あられ": {
+    "fontFamily": "Aralet",
+    "weight": [],
+    "type": ["pro", "mono"],
+    "format": ["embedded-opentype", "woff", "opentype"],
+    "path": "https://www.font-stream.com/fontdata/"
   }
-]
+}
