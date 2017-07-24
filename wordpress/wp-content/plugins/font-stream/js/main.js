@@ -162,7 +162,7 @@
                         default:
                             return;
                     }
-                    css += 'url("https://www.font-stream.com/fontdata/AnzuMojiMono-none.' + extension + '?token=' + token + '") ';
+                    css += 'url("https://www.font-stream.com/fontdata/' + fontFamily + '.' + extension + '?token=' + token + '") ';
                     css += 'format("' + format + '"),';
                 });
 
