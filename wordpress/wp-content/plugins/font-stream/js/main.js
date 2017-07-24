@@ -173,6 +173,13 @@
             return css;
         };
 
+	var showCss = function(css){
+		css = css.replace(/(\{|\}|;|,)/g,"$1\n")
+			.replace(/\n(font|src|url)/g,"\n    $1");
+                $("textarea.css").val(css);
+
+	};
+
         $buttonSave.on("click", function (e) {
             e.preventDefault();
             if (onFetch) {//json取得中は何もしない
@@ -211,8 +218,8 @@
                     options: options
                 },
             }).done(function (json) {
+		showCss(css);
                 alert("更新完了");
-                console.log(json);
             }).fail(function () {
                 alert("保存に失敗しました。");
             });
@@ -230,8 +237,8 @@
                 url: endpoint,
                 dataType: "json"
             }).done(function (json) {
-                console.log(json);
                 $("#token").val(json.token);
+		showCss(json.css);
 
                 for (var i = 0; i < json.options.length; i++) {
                     createFontOptions(json.options[i]);

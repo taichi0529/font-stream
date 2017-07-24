@@ -96,7 +96,11 @@ class Font_Stream
 				</thead>
 				<tbody class="fontList"></tbody>
 			</table>
+
 			<button name="submit" class="add button button-primary">＋フォントを追加</button>
+
+			<h4>CSS</h4>
+			<textarea class="css"></textarea>
 			<button name="submit" class="save button button-primary">変更を保存</button>
 		</form>';
 	}
